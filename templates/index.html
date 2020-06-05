@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% set active = "Home" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Seam Carving for the web</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+    <div class="container">
+      <br>
+      <center>
+      <p class="text-center" style="width: 700px;" >Our website uses the seam carving algorithm developed by Avidan and Shamir to 
+        resize images. Here, you can remove parts of your image without losing important content or expand your image without
+        warping it. See an example below, or try it
+        out with one of your own images!</p>
+
+      <img src="static/lake_home.jpg" alt="Lake Geneva- August 2019"
+      height=200 />
+      <img src="static/lake_carved_home.jpg" alt="Lake Geneva Carved"
+      height=200 />
+      <img src="static/lake_vis_home.jpg" alt="Lake Geneva Visualization"
+      height=200 />
+      
+      <br>
+      <br>
+      <p class = "text-center" style="width: 700px;"> Example of adding 50 horizontal seams and removing 
+        10 vertical seams to an image of Lake Geneva. Red lines visualize added seams
+      and white lines visualize removed seams. </p>
+      <br>
+    </center>
+
+
+      <h3>Upload an image below to try it yourself:</h3>
+      <br>
+      <form method="post" action="{{ url_for('home') }}" 
+        accept="image/*" enctype="multipart/form-data">
+          <input type=file name=file>
+          <br>
+          <br>
+          <p>Enter number of horizontal seams (int):</p>
+          <p><input name="horizontal_seams" type="number" 
+            placeholder="Horizontal seams"/></p>
+          <p>Enter number of vertical seams (int):</p>
+          <p><input name="vertical_seams" type="number" 
+            placeholder="Vertical seams"/></p>
+          <p><input type="submit" value="Seam it!" /></p>
+      </form>
+      <br>
+    </div>
+  </body>
+</html>
+
+{% endblock %}

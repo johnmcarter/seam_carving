@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% set active = "Home" %}
+
+{% block title %}
+Result
+{% endblock %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Seam Carving for the web</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+    <div class="container">
+      <br>
+      <h5>Result after carving with {{horizontal_seams}} 
+        horizontal seams and {{vertical_seams}} vertical seams with visualization:</h5>
+      <center>
+      <a href="{{name}}">
+        <img src="{{name}}" alt="Uploaded image" width=400 />
+      </a>
+      <a href="{{vis_name}}">
+        <img src="{{vis_name}}" alt="Visualization image" width=400 />
+      </a>
+      <br>
+      <br>
+      <h4><a href="/">Click here to re-calculate</a></h4>
+      </center>
+      <br>
+    </div>
+  </body>
+</html>
+
+{% endblock %}
