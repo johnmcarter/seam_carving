@@ -5,7 +5,7 @@
 
 To run this implementation, download or clone this repository. To install the required dependencies, run 
 ```
-pip3 -r requirements.txt
+pip3 install -r requirements.txt
 ```
 in the same directory on the command line. To then run the code and launch the web GUI, run 
 ```
