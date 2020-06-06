@@ -21,7 +21,6 @@ def allowed_file(filename):
 # https://flask.palletsprojects.com/en/1.1.x/patterns/fileuploads/
 @app.route("/", methods=["GET", "POST"])
 def home():
-    errors = ""
     if request.method == "POST":
         # Check if the file is included in the POST
         if 'file' not in request.files:
@@ -36,23 +35,24 @@ def home():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        
-        horizontal_seams = None
-        vertical_seams = None
+
         # Check if the integer input is as expected
         try:
             horizontal_seams = int(request.form["horizontal_seams"])
+        except:
+            horizontal_seams = 0
+        try:
             vertical_seams = int(request.form["vertical_seams"])
         except:
-            errors += "<p>{!r} is not a number.</p>\n".format(request.form["horizontal_seams"])
+            vertical_seams = 0
 
         # Call seam_carving to do the work
-        name = "/static/"+filename
-        qualified_name = os.getcwd()+name
+        original_name = "/static/"+filename
+        qualified_name = os.getcwd()+original_name
         name, vis_name = run(qualified_name, horizontal_seams, vertical_seams)
         return render_template('result.html', \
-            name=name, vis_name=vis_name, horizontal_seams=horizontal_seams, \
-                                        vertical_seams=vertical_seams) 
+            original=original_name, name=name, vis_name=vis_name, \
+                horizontal_seams=horizontal_seams, vertical_seams=vertical_seams) 
 
     return render_template('index.html')  
 
